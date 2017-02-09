@@ -1,30 +1,36 @@
 package contract.obligation;
 
+/**
+ * A scheduled obligation contains an obligation as well as a time for
+ * scheduling the obligation
+ * 
+ * @author prauwolf
+ *
+ */
 public class ScheduledObligation {
 
-	private Obligation obligation;
-	private Double scheduledTime;
-	
-	public ScheduledObligation(Obligation o, Double time) {
-		this.obligation = o;
-		this.scheduledTime = time;
-	}
+    private Obligation obligation;
+    private Double scheduledTime;
 
-	public Obligation getObligation() {
-		return obligation;
-	}
+    public ScheduledObligation(Obligation o, Double time) {
+	this.obligation = o;
+	this.scheduledTime = time;
+    }
 
-	public void setObligation(Obligation obligation) {
-		this.obligation = obligation;
-	}
+    public Obligation getObligation() {
+	return obligation;
+    }
 
-	public Double getScheduledTime() {
-		return scheduledTime;
-	}
+    public void setObligation(Obligation obligation) {
+	this.obligation = obligation;
+    }
 
-	public void setScheduledTime(Double scheduledTime) {
-		this.scheduledTime = scheduledTime;
-	}
-	
-	
+    public Double getScheduledTime() {
+	return scheduledTime;
+    }
+
+    public void setScheduledTime(Double scheduledTime) {
+	this.scheduledTime = scheduledTime;
+    }
+
 }

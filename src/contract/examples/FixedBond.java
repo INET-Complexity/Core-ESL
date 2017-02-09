@@ -6,6 +6,7 @@ import contract.handler.ContractHandler;
 import contract.messages.ObligationResponse;
 import contract.obligation.Obligation;
 import contract.obligation.ScheduledObligation;
+import inventory.Contract;
 import inventory.Good;
 import sim.engine.SimState;
 
@@ -34,11 +35,10 @@ public class FixedBond extends MasonScheduledContracts {
 	this.goodName = goodName;
 	this.gapBetweenCoupons = gapBetweenCoupons;
 
-	this.scheduleEvent(requestNextObligation(state), state);
     }
 
     @Override
-    public ScheduledObligation requestNextObligation(SimState state) {
+    public ScheduledObligation requestNextObligation() {
 
 	Obligation o = null;
 	Double time = gapBetweenCoupons;
@@ -57,7 +57,7 @@ public class FixedBond extends MasonScheduledContracts {
 	    break;
 	}
 
-	return (new ScheduledObligation(o, state.schedule.getSteps() + time));
+	return (new ScheduledObligation(o, this.getState().schedule.getSteps() + time));
     }
 
     @Override
@@ -111,12 +111,25 @@ public class FixedBond extends MasonScheduledContracts {
 	}
 	System.out.println("The current state is: " + this.currentState + ". Therefore, " + from.getName() + " gave "
 		+ to.getName() + " " + quantity + " of " + what);
-	System.out.println("Agent " + from.getName() + " has $" + from.getInventory().getAllGoodEntries().get("cash"));
-	System.out.println("Agent " + to.getName() + " has $" + to.getInventory().getAllGoodEntries().get("cash"));
+	try {
+	    System.out
+		    .println("Agent " + from.getName() + " has $" + from.getInventory().getGood("cash").getQuantity());
+	    System.out.println("Agent " + to.getName() + " has $" + to.getInventory().getGood("cash").getQuantity());
+	} catch (Exception e) {
+	    System.out.println(e.getMessage());
+	    e.printStackTrace();
+	}
 
     }
 
     private enum State {
 	PRINCIPAL, COUPON, DEFAULT, MATURED, TERMINATED
     }
+
+    @Override
+    public Contract addition(Contract c) {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
 }

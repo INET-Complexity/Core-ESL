@@ -1,132 +1,203 @@
-        package inventory;
+package inventory;
 
-import java.util.*;
-import java.util.function.BiFunction;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.ToDoubleBiFunction;
+import java.util.stream.Collectors;
 
-
-        /**
- * Created by taghawi on 10/21/16.
+/**
+ * Created by taghawi on 10/21/16. edited by prauwolf 12/09/16.
  */
 public class Inventory {
-    Set<Contract> contracts = new HashSet<Contract>();
-    Map<String, Double> goods = new HashMap<String, Double>();
+    Set<Item> items = new HashSet<Item>();
+
     /**
-     * Adds an Item to the BalanceSheet. This method is
-     * protected to maintain stock-flow consistency.
-     * @param item the Item to add
-     * @return returns a boolean regarding whether the add was successful.
+     * Adds an item of type Good or Contract to the Inventory
+     * 
+     * @param item
+     *            the item to add to the inventory.
+     * @throws Exception
+     *             If the Item is not of type Good or Contract, and error will
+     *             be thrown.
      */
-    public void add(Good good) {
-        goods.put(good.getName(), goods.getOrDefault(good.getName(), 0.0) + good.getQuantity());
+    public void add(Item item) throws Exception {
+	if (item instanceof Good) {
+	    Good g = (Good) item;
+	    this.add(g);
+	} else if (item instanceof Contract) {
+	    Contract c = (Contract) item;
+	    this.add(c);
+	} else {
+	    throw new Exception("Type of Item is not handled by the Inventory");
+	}
     }
 
-    public void add(Contract contract) throws Exception {
-        if (this.contracts.contains(contract)) {
-            throw new Exception("add contract that is already present");
-        } else {
-            this.contracts.add(contract);
-        }
-    }
-    public void remove(Good good) throws Exception {
-        if (good.getQuantity() > this.goods.get(good.getName())) {
-            throw new Exception(("not enough goods"));
-        } else {
-            goods.put(good.getName(), goods.get(good.getName()) - good.getQuantity());
-        }
+    /**
+     * Private method called from add(Item). Adds an Item to the BalanceSheet.
+     * This method is protected to maintain stock-flow consistency.
+     * 
+     * @param item
+     *            the Item to add
+     * @return returns a boolean regarding whether the add was successful.
+     * @throws Exception
+     */
+    private void add(Good good) throws Exception {
+
+	// check to see if Good has a quantity greater than zero.
+	if (good.getQuantity() < 0.0) {
+	    throw new Exception("When adding a good, the quantity must be greater than zero. The current good: "
+		    + good.getName() + " has a quantity of: " + good.getQuantity());
+	}
+
+	// Check whether there are any existing goods which match the name of
+	// this good.
+	List<Good> matches = items.stream().filter(t -> t instanceof Good && t.getName().equals(good.getName()))
+		.map(Good.class::cast).collect(Collectors.toList());
+
+	// If there are no matches, then add the good to the Set Items.
+	if (matches.size() == 0) {
+	    items.add(good);
+	    // If there is one match, then add the quantity of the good to the
+	    // current good.
+	} else if (matches.size() == 1) {
+	    matches.get(0).setQuantity(matches.get(0).getQuantity() + good.getQuantity());
+	    // If there are more than one match, then the integrity of the
+	    // Inventory has been compromised. This should never occur.
+	} else {
+	    throw new Exception("There is more than one good in the inventory with the name: " + good.getName()
+		    + ". This is illegal");
+	}
     }
 
-    public void remove(Contract contract) {
-        this.contracts.remove(contract);
+    /**
+     * Private method called from add(Item) which attempts to add a contract to
+     * the Item set.
+     * 
+     * @param contract
+     *            the contract to add
+     * @throws Exception
+     *             Exception thrown if contract cannot be added to the set.
+     */
+    private void add(Contract contract) throws Exception {
+	if (this.items.contains(contract)) {
+	    throw new Exception("cannot add contract that is already present");
+	} else {
+	    this.items.add(contract);
+	}
     }
 
-    public double net_value(Map<Object, Object> parameters, Map<Contract, BiFunction<Contract, Map, Double>> value_functions) {
-        Double nv = 0.0;
-        for (Contract contract : this.contracts) {
-            nv += value_functions.get(contract.getClass()).apply(contract, parameters);
-        }
-        for (Map.Entry<String, Double> entry : this.goods.entrySet()) {
-            nv += entry.getValue() * (Double)parameters.get("price_" + entry.getKey());
-        }
-        return nv;
+    /**
+     * Removes a Good or a Contract from the Inventory
+     * 
+     * @param item
+     *            The item to be removed.
+     * @throws Exception
+     *             Throws an exception if the item is not a Good or Contract
+     */
+    public void remove(Item item) throws Exception {
+	if (item instanceof Good) {
+	    Good g = (Good) item;
+	    this.remove(g);
+	} else if (item instanceof Contract) {
+	    Contract c = (Contract) item;
+	    this.remove(c);
+	} else {
+	    throw new Exception("Type of Item is not handled by the Inventory");
+	}
+
     }
 
-    public double asset_value(Map<Object, Object> parameters, HashMap<Class<?>, BiFunction<Contract, Map, Double>> value_functions) {
-        Double nv = 0.0;
-        for (Contract contract : this.contracts) {
-            double value = value_functions.get(contract.getClass()).apply(contract, parameters);
-            if (value > 0) {
-                nv += value;
-            }
-        }
-        for (Map.Entry<String, Double> entry : this.goods.entrySet()) {
-            double value = entry.getValue() * (Double)parameters.get("price_" + entry.getKey());
-            if (value > 0) {
-                nv += value;
-            }
-        }
-        return nv;
+    private void remove(Good good) throws Exception {
+
+	// check to see if Good has a quantity greater than zero.
+	if (good.getQuantity() < 0.0) {
+	    throw new Exception("When removing a good, the quantity must be greater than zero. The current good: "
+		    + good.getName() + " has a quantity of: " + good.getQuantity());
+	}
+
+	// Check whether there are any existing goods which match the name of
+	// this good.
+	List<Good> matches = items.stream().filter(t -> t instanceof Good && t.getName().equals(good.getName()))
+		.map(Good.class::cast).collect(Collectors.toList());
+
+	// If there are no matches, then the good cannot be removed, since it
+	// doesn't exist.
+	if (matches.size() == 0) {
+
+	    throw new Exception(
+		    "The inventory does not contain the good: " + good.getName() + ". So, it cannot be removed.");
+
+	    // If there is one match, then remove the quantity of the good from
+	    // the current good.
+	} else if (matches.size() == 1) {
+	    Good existingGood = matches.get(0);
+	    if (existingGood.getQuantity() < good.getQuantity()) {
+		throw new Exception("The current quantity of Good: " + good.getName() + " is "
+			+ existingGood.getQuantity() + ". That is not enough to fulfill the request for a quantity of: "
+			+ good.getQuantity());
+	    } else {
+		existingGood.setQuantity(existingGood.getQuantity() - good.getQuantity());
+	    }
+
+	    // If there are more than one match, then the integrity of the
+	    // Inventory has been compromised. This should never occur.
+	} else {
+	    throw new Exception("There is more than one good in the inventory with the name: " + good.getName()
+		    + ". This is illegal");
+	}
     }
 
-    public double liability_value(Map<Object, Object> parameters, Map<Contract, BiFunction<Contract, Map, Double>> value_functions) {
-        Double nv = 0.0;
-        for (Contract contract : this.contracts) {
-            double value = value_functions.get(contract.getClass()).apply(contract, parameters);
-            if (value < 0) {
-                nv += value;
-            }
-        }
-        for (Map.Entry<String, Double> entry : this.goods.entrySet()) {
-            double value = entry.getValue() * (Double)parameters.get("price_" + entry.getKey());
-            if (value < 0) {
-                nv += value;
-            }
-        }
-        return nv;
-    }
-    
-    public HashMap<String, Double> getAllGoodEntries() {
-    	HashMap<String, Double> items = new HashMap<String, Double>();
-    	for (String key: this.goods.keySet()) {
-    		items.put(key, this.goods.get(key));
-    	}
-    	
-    	return items;
+    private void remove(Contract contract) {
+	this.items.remove(contract);
+
     }
 
-    public HashMap<String, Double> assets(Map<Object, Object> parameters, HashMap<Class<?>, BiFunction<Contract, Map, Double>> value_functions) {
-        HashMap<String, Double> items = new HashMap<String, Double>();
-        for (Contract contract : this.contracts) {
-            double value = value_functions.get(contract.getClass()).apply(contract, parameters);
-            if (value > 0) {
-                items.put(contract.getName(), value);
-            }
-        }
-        for (Map.Entry<String, Double> entry : this.goods.entrySet()) {
-            double value = entry.getValue() * (Double)parameters.get("price_" + entry.getKey());
-            if (value > 0) {
-                items.put(entry.getKey(), value);
-            }
-        }
-        return items;
+    public List<Good> getAllGoodEntries() {
+	return items.stream().filter(t -> t instanceof Good).map(Good.class::cast).collect(Collectors.toList());
+
     }
 
-            public HashMap<String, Double> liabilities(Map<Object, Object> parameters, HashMap<Class<?>, BiFunction<Contract, Map, Double>> value_functions) {
-                HashMap<String, Double> items = new HashMap<String, Double>();
-                for (Contract contract : this.contracts) {
-                    double value = value_functions.get(contract.getClass()).apply(contract, parameters);
-                    if (value < 0) {
-                        items.put(contract.getName(), value);
-                    }
-                }
-                for (Map.Entry<String, Double> entry : this.goods.entrySet()) {
-                    double value = entry.getValue() * (Double)parameters.get("price_" + entry.getKey());
-                    if (value < 0) {
-                        items.put(entry.getKey(), value);
-                    }
-                }
-                return items;
-            }
+    /**
+     * Returns a good queried by name if it exists in the Inventory.
+     * 
+     * @param name
+     *            the name of the good
+     * @return the returned good.
+     * @throws Exception
+     */
+    public Good getGood(String name) throws Exception {
+	List<Good> matched = this.getAllGoodEntries().stream().filter(g -> g.getName().equals(name))
+		.collect(Collectors.toList());
+
+	if (matched.size() == 0) {
+	    return null;
+	} else if (matched.size() > 1) {
+	    throw new Exception("More than one Good of that name was discovered");
+	} else {
+	    return matched.get(0);
+	}
+
+    }
+
+    /**
+     * Calculates the net value for the inventory
+     * 
+     * @param parameters
+     * @param value_functions
+     * @return
+     */
+    public double net_value(Map<Class, List<Object>> parameters,
+	    Map<Class, ToDoubleBiFunction<Item, List<Object>>> valuationMap) {
+
+	Double nv = 0.0;
+
+	for (Item i : this.items) {
+	    nv += valuationMap.get(i.getClass()).applyAsDouble(i, parameters.get(i.getClass()));
+	}
+
+	return nv;
+    }
+
 }
-
-
-
