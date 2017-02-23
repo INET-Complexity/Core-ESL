@@ -1,26 +1,33 @@
 package inventory;
 
-//import com.sun.org.apache.xpath.internal.functions.Function;
-
-import java.util.Map;
-import java.util.function.BiFunction;
-
 /**
  * Created by taghawi on 10/21/16.
  */
-public class Contract extends Item {
+public abstract class Contract extends Item {
 
+    /**
+     * Constructor.
+     * 
+     * @param name
+     *            Name of the Contract
+     */
     public Contract(String name) {
 	super(name);
     }
 
-    public Double valutation(Map<Object, Object> parameters,
-	    Map<Contract, BiFunction<Contract, Map, Double>> value_functions) {
-	return value_functions.get(this.getClass()).apply(this, parameters);
-    }
+    /**
+     * The start method must be instantiated in order to start the contract
+     */
+    public abstract void start();
 
-    public Double valutation(Map<Object, Object> parameters, BiFunction<Contract, Map, Double> value_function) {
-	return value_function.apply(this, parameters);
-    }
+    /**
+     * Adds this contract to another contract and returns a contract
+     * 
+     * @param c
+     *            The contract to add to this contract
+     * @return A new Contract comprised of the addition of this and another
+     *         contract.
+     */
+    public abstract Contract addition(Contract c);
 
 }

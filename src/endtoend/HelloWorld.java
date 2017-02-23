@@ -25,7 +25,12 @@ public class HelloWorld extends SimState {
 	    Agent a = new Agent("Agent " + i);
 
 	    // initialize each agent with $100.0
-	    a.getInventory().add(new Good("cash", 1000.0));
+	    try {
+		a.getInventory().add(new Good("cash", 1000.0));
+	    } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
 
 	    agents.add(a);
 	}
@@ -52,7 +57,7 @@ public class HelloWorld extends SimState {
 
 		RandomTransfers contract = new RandomTransfers(agents.get(i), agents.get(j), "randomTransfers", this,
 			handler);
-
+		contract.start();
 	    }
 	}
     }
