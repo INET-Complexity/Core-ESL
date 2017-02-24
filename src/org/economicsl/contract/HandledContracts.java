@@ -1,12 +1,12 @@
-package contract;
+package org.economicsl.contract;
 
-import contract.handler.ContractHandler;
-import contract.messages.FillObligation;
-import contract.messages.ObligationResponse;
-import inventory.Contract;
+import org.economicsl.contract.handler.ContractHandler;
+import org.economicsl.contract.messages.FillObligation;
+import org.economicsl.contract.messages.ObligationResponse;
+import org.economicsl.inventory.Contract;
 
 /**
- * HandledContracts require that Obligations in a contract be handled by a
+ * HandledContracts require that Obligations in a org.economicsl.contract be handled by a
  * ContractHandler. As such, the user will need to specify the type of
  * ContractHandler which will be handle Contract Obligations
  * 

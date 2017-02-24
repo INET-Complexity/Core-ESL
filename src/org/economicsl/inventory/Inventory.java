@@ -1,4 +1,4 @@
-package inventory;
+package org.economicsl.inventory;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Inventory {
      * Adds an item of type Good or Contract to the Inventory
      * 
      * @param item
-     *            the item to add to the inventory.
+     *            the item to add to the org.economicsl.inventory.
      * @throws Exception
      *             If the Item is not of type Good or Contract, and error will
      *             be thrown.
@@ -66,23 +66,23 @@ public class Inventory {
 	    // If there are more than one match, then the integrity of the
 	    // Inventory has been compromised. This should never occur.
 	} else {
-	    throw new Exception("There is more than one good in the inventory with the name: " + good.getName()
+	    throw new Exception("There is more than one good in the org.economicsl.inventory with the name: " + good.getName()
 		    + ". This is illegal");
 	}
     }
 
     /**
-     * Private method called from add(Item) which attempts to add a contract to
+     * Private method called from add(Item) which attempts to add a org.economicsl.contract to
      * the Item set.
      * 
      * @param contract
-     *            the contract to add
+     *            the org.economicsl.contract to add
      * @throws Exception
-     *             Exception thrown if contract cannot be added to the set.
+     *             Exception thrown if org.economicsl.contract cannot be added to the set.
      */
     private void add(Contract contract) throws Exception {
 	if (this.items.contains(contract)) {
-	    throw new Exception("cannot add contract that is already present");
+	    throw new Exception("cannot add org.economicsl.contract that is already present");
 	} else {
 	    this.items.add(contract);
 	}
@@ -127,7 +127,7 @@ public class Inventory {
 	if (matches.size() == 0) {
 
 	    throw new Exception(
-		    "The inventory does not contain the good: " + good.getName() + ". So, it cannot be removed.");
+		    "The org.economicsl.inventory does not contain the good: " + good.getName() + ". So, it cannot be removed.");
 
 	    // If there is one match, then remove the quantity of the good from
 	    // the current good.
@@ -144,7 +144,7 @@ public class Inventory {
 	    // If there are more than one match, then the integrity of the
 	    // Inventory has been compromised. This should never occur.
 	} else {
-	    throw new Exception("There is more than one good in the inventory with the name: " + good.getName()
+	    throw new Exception("There is more than one good in the org.economicsl.inventory with the name: " + good.getName()
 		    + ". This is illegal");
 	}
     }
@@ -182,7 +182,7 @@ public class Inventory {
     }
 
     /**
-     * Calculates the net value for the inventory
+     * Calculates the net value for the org.economicsl.inventory
      * 
      * @param parameters
      * @param value_functions

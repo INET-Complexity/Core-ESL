@@ -1,10 +1,10 @@
-package contract.messages;
+package org.economicsl.contract.messages;
 
-import contract.obligation.Obligation;
+import org.economicsl.contract.obligation.Obligation;
 
 /**
  * Once an attempt has been made to fulfill an Obligation, the
- * ObligationResponse informs a contract whether the Obligation was successfully
+ * ObligationResponse informs a org.economicsl.contract whether the Obligation was successfully
  * fulfilled.
  * 
  * @author prauwolf

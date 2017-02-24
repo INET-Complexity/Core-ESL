@@ -1,11 +1,11 @@
-package contract.handler;
+package org.economicsl.contract.handler;
 
-import contract.messages.FillObligation;
-import contract.messages.ObligationResponse;
-import contract.obligation.Obligation;
+import org.economicsl.contract.messages.FillObligation;
+import org.economicsl.contract.messages.ObligationResponse;
+import org.economicsl.contract.obligation.Obligation;
 
 /**
- * ContractHandlers receive Obligation requests from a contract, attempt to
+ * ContractHandlers receive Obligation requests from a org.economicsl.contract, attempt to
  * fulfill the requests, then send the outcome of the request back to the
  * Contract. ContractHandler is an abstract class which requires that the user
  * instantiates handleObligation.
