@@ -1,4 +1,4 @@
-package doubleEntry;
+package accounting;
 
 public enum AccountType {
     ASSET,
