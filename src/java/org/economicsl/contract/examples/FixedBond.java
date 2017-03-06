@@ -1,13 +1,13 @@
-package org.java.org.economicsl.contract.examples;
+package org.economicsl.contract.examples;
 
-import org.java.org.economicsl.agent.Agent;
-import org.java.org.economicsl.contract.ScheduledContracts;
-import org.java.org.economicsl.contract.handler.ContractHandler;
-import org.java.org.economicsl.contract.messages.ObligationResponse;
-import org.java.org.economicsl.contract.obligation.Obligation;
-import org.java.org.economicsl.contract.obligation.ScheduledObligation;
-import org.java.org.economicsl.inventory.Contract;
-import org.java.org.economicsl.inventory.Good;
+import org.economicsl.agent.Agent;
+import org.economicsl.contract.ScheduledContracts;
+import org.economicsl.contract.handler.ContractHandler;
+import org.economicsl.contract.messages.ObligationResponse;
+import org.economicsl.contract.obligation.Obligation;
+import org.economicsl.contract.obligation.ScheduledObligation;
+import org.economicsl.inventory.Contract;
+import org.economicsl.inventory.Good;
 import sim.engine.SimState;
 
 public class FixedBond extends ScheduledContracts {

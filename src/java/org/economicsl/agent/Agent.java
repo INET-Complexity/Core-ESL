@@ -1,6 +1,6 @@
-package org.java.org.economicsl.agent;
+package org.economicsl.agent;
 
-import org.java.org.economicsl.inventory.Inventory;
+import org.economicsl.inventory.Inventory;
 
 /**
  * The Agent is a foundation class of ESL. All Agent's have balancesheets.

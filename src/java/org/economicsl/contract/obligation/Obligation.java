@@ -1,7 +1,7 @@
-package org.java.org.economicsl.contract.obligation;
+package org.economicsl.contract.obligation;
 
-import org.java.org.economicsl.agent.Agent;
-import org.java.org.economicsl.inventory.Item;
+import org.economicsl.agent.Agent;
+import org.economicsl.inventory.Item;
 
 /**
  * The Obligation class is the org message sent from Contracts requesting the

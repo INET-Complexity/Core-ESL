@@ -1,6 +1,6 @@
-package org.java.org.economicsl.contract.messages;
+package org.economicsl.contract.messages;
 
-import org.java.org.economicsl.contract.obligation.Obligation;
+import org.economicsl.contract.obligation.Obligation;
 
 /**
  * Once an attempt has been made to fulfill an Obligation, the
