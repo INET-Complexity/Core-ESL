@@ -1,4 +1,4 @@
-package org.economicsl.endtoend;
+package org.economicsl.test_endtoend;
 
 import java.util.ArrayList;
 import java.util.List;
