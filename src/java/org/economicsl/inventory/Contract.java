@@ -1,4 +1,4 @@
-package org.java.org.economicsl.inventory;
+package org.economicsl.inventory;
 
 import sim.engine.SimState;
 

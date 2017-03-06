@@ -1,10 +1,10 @@
-package org.java.org.economicsl.contract;
+package org.economicsl.contract;
 
-import org.java.org.economicsl.contract.handler.ContractHandler;
-import org.java.org.economicsl.contract.messages.FillObligation;
-import org.java.org.economicsl.contract.messages.ObligationResponse;
-import org.java.org.economicsl.contract.obligation.Obligation;
-import org.java.org.economicsl.contract.obligation.ScheduledObligation;
+import org.economicsl.contract.handler.ContractHandler;
+import org.economicsl.contract.messages.FillObligation;
+import org.economicsl.contract.messages.ObligationResponse;
+import org.economicsl.contract.obligation.Obligation;
+import org.economicsl.contract.obligation.ScheduledObligation;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 

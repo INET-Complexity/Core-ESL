@@ -1,4 +1,4 @@
-package org.java.org.economicsl.inventory;
+package org.economicsl.inventory;
 
 /**
  * Created by taghawi on 10/21/16.

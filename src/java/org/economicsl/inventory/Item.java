@@ -1,4 +1,4 @@
-package org.java.org.economicsl.inventory;
+package org.economicsl.inventory;
 
 /**
  * Item is the parent class for all objects which go on an org.economicsl.inventory. This

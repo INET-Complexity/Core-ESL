@@ -1,8 +1,8 @@
-package org.java.org.economicsl.contract.handler;
+package org.economicsl.contract.handler;
 
-import org.java.org.economicsl.contract.messages.FillObligation;
-import org.java.org.economicsl.contract.messages.ObligationResponse;
-import org.java.org.economicsl.contract.obligation.Obligation;
+import org.economicsl.contract.messages.FillObligation;
+import org.economicsl.contract.messages.ObligationResponse;
+import org.economicsl.contract.obligation.Obligation;
 
 /**
  * ContractHandlers receive Obligation requests from a org.economicsl.contract, attempt to

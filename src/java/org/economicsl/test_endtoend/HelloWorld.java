@@ -1,12 +1,12 @@
-package org.java.org.economicsl.endtoend;
+package org.economicsl.test_endtoend;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.java.org.economicsl.agent.Agent;
-import org.java.org.economicsl.contract.examples.RandomTransfers;
-import org.java.org.economicsl.contract.handler.AutomaticContractHandler;
-import org.java.org.economicsl.inventory.Good;
+import org.economicsl.agent.Agent;
+import org.economicsl.contract.examples.RandomTransfers;
+import org.economicsl.contract.handler.AutomaticContractHandler;
+import org.economicsl.inventory.Good;
 import sim.engine.SimState;
 
 public class HelloWorld extends SimState {

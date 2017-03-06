@@ -1,8 +1,8 @@
-package org.java.org.economicsl.contract.handler;
+package org.economicsl.contract.handler;
 
-import org.java.org.economicsl.contract.messages.ObligationResponse;
-import org.java.org.economicsl.contract.obligation.Obligation;
-import org.java.org.economicsl.inventory.Good;
+import org.economicsl.contract.messages.ObligationResponse;
+import org.economicsl.contract.obligation.Obligation;
+import org.economicsl.inventory.Good;
 
 public class AutomaticContractHandler extends ContractHandler {
 

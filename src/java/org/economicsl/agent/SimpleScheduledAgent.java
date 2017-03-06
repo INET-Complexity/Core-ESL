@@ -2,7 +2,7 @@
  * Created by Torsten Heinrich
  */
 
-package org.java.org.economicsl.agent;
+package org.economicsl.agent;
 
 import sim.engine.SimState;
 import sim.engine.Steppable;
