@@ -1,11 +1,11 @@
-package inventory;
+package org.java.org.economicsl.inventory;
 
 /**
  * Created by taghawi on 10/21/16.
  */
 public class Good extends Item {
 
-    // Each good on the inventory has a quantity.
+    // Each good on the org.economicsl.inventory has a quantity.
     private double quantity;
 
     public Good(String name, double quantity) {

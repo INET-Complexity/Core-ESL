@@ -1,12 +1,12 @@
-package endtoend;
+package org.java.org.economicsl.endtoend;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import agent.Agent;
-import contract.examples.RandomTransfers;
-import contract.handler.AutomaticContractHandler;
-import inventory.Good;
+import org.java.org.economicsl.agent.Agent;
+import org.java.org.economicsl.contract.examples.RandomTransfers;
+import org.java.org.economicsl.contract.handler.AutomaticContractHandler;
+import org.java.org.economicsl.inventory.Good;
 import sim.engine.SimState;
 
 public class HelloWorld extends SimState {
@@ -24,7 +24,7 @@ public class HelloWorld extends SimState {
 	for (int i = 1; i <= 2; i++) {
 	    Agent a = new Agent("Agent " + i);
 
-	    // initialize each agent with $100.0
+	    // initialize each org.economicsl.agent with $100.0
 	    try {
 		a.getInventory().add(new Good("cash", 1000.0));
 	    } catch (Exception e) {
@@ -57,7 +57,7 @@ public class HelloWorld extends SimState {
 
 		RandomTransfers contract = new RandomTransfers(agents.get(i), agents.get(j), "randomTransfers", this,
 			handler);
-		contract.start();
+		contract.start(this);
 	    }
 	}
     }

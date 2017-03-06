@@ -1,10 +1,10 @@
-package contract.obligation;
+package org.java.org.economicsl.contract.obligation;
 
-import agent.Agent;
-import inventory.Item;
+import org.java.org.economicsl.agent.Agent;
+import org.java.org.economicsl.inventory.Item;
 
 /**
- * The Obligation class is the main message sent from Contracts requesting the
+ * The Obligation class is the org message sent from Contracts requesting the
  * manipulation of balancesheets. It defines what item should be moved from one
  * balancesheet to another.
  * 
@@ -13,10 +13,10 @@ import inventory.Item;
  */
 public class Obligation {
 
-    // The agent who will receive the item.
+    // The org.economicsl.agent who will receive the item.
     private Agent to;
 
-    // The agent offering the item.
+    // The org.economicsl.agent offering the item.
     private Agent from;
 
     // The item being transferred.

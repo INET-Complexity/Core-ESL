@@ -1,4 +1,4 @@
-package contract.obligation;
+package org.java.org.economicsl.contract.obligation;
 
 /**
  * A scheduled obligation contains an obligation as well as a time for

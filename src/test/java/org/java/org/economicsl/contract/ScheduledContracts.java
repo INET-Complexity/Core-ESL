@@ -1,23 +1,23 @@
-package contract;
+package org.java.org.economicsl.contract;
 
-import contract.handler.ContractHandler;
-import contract.messages.FillObligation;
-import contract.messages.ObligationResponse;
-import contract.obligation.Obligation;
-import contract.obligation.ScheduledObligation;
+import org.java.org.economicsl.contract.handler.ContractHandler;
+import org.java.org.economicsl.contract.messages.FillObligation;
+import org.java.org.economicsl.contract.messages.ObligationResponse;
+import org.java.org.economicsl.contract.obligation.Obligation;
+import org.java.org.economicsl.contract.obligation.ScheduledObligation;
 import sim.engine.SimState;
 import sim.engine.Steppable;
 
 /**
- * MasonScheduledContracts are a subclass of HandledContracts, which
+ * ScheduledContracts are a subclass of HandledContracts, which
  * automatically schedule Obligations in Mason.
  * 
  * @author prauwolf
  *
  */
-public abstract class MasonScheduledContracts extends HandledContracts implements Steppable {
+public abstract class ScheduledContracts extends HandledContracts implements Steppable {
 
-    // The next obligation which the contract will require.
+    // The next obligation which the org.economicsl.contract will require.
     // If null, then there is no next Obligation
     private Obligation nextObligation;
 
@@ -29,13 +29,13 @@ public abstract class MasonScheduledContracts extends HandledContracts implement
      * Builds a Contract which will schedule its Obligations in Mason
      * 
      * @param name
-     *            Name of the contract
+     *            Name of the org.economicsl.contract
      * @param state
      *            The Mason SimState - contains the scheduler
      * @param handler
      *            The contracthandler which handles the Contracts Obligations
      */
-    public MasonScheduledContracts(String name, SimState state, ContractHandler handler) {
+    public ScheduledContracts(String name, SimState state, ContractHandler handler) {
 	super(name, handler);
 	this.state = state;
     }
@@ -58,7 +58,7 @@ public abstract class MasonScheduledContracts extends HandledContracts implement
 	this.handleResponse(response);
 
 	// set schedule the next obligation
-	ScheduledObligation o = this.requestNextObligation();
+	ScheduledObligation o = this.requestNextObligation(state);
 	this.scheduleEvent(o);
 
     }
@@ -67,8 +67,8 @@ public abstract class MasonScheduledContracts extends HandledContracts implement
      * Overrides the start method and schedules the next Obligation.
      */
     @Override
-    public void start() {
-	this.scheduleEvent(requestNextObligation());
+    public void start(SimState state) {
+	this.scheduleEvent(requestNextObligation(state));
     }
 
     /**
@@ -93,10 +93,11 @@ public abstract class MasonScheduledContracts extends HandledContracts implement
 
     /**
      * Requests the next Obligation from the Contract.
-     * 
+     *
+     * @param state The SimState object representing the simulation
      * @return returns an obligation to be scheduled.
      */
-    public abstract ScheduledObligation requestNextObligation();
+    public abstract ScheduledObligation requestNextObligation(SimState state);
 
     /**
      * Stores the next Obligation to be scheduled

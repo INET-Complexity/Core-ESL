@@ -1,16 +1,16 @@
-package contract.examples;
+package org.java.org.economicsl.contract.examples;
 
-import agent.Agent;
-import contract.MasonScheduledContracts;
-import contract.handler.ContractHandler;
-import contract.messages.ObligationResponse;
-import contract.obligation.Obligation;
-import contract.obligation.ScheduledObligation;
-import inventory.Contract;
-import inventory.Good;
+import org.java.org.economicsl.agent.Agent;
+import org.java.org.economicsl.contract.ScheduledContracts;
+import org.java.org.economicsl.contract.handler.ContractHandler;
+import org.java.org.economicsl.contract.messages.ObligationResponse;
+import org.java.org.economicsl.contract.obligation.Obligation;
+import org.java.org.economicsl.contract.obligation.ScheduledObligation;
+import org.java.org.economicsl.inventory.Contract;
+import org.java.org.economicsl.inventory.Good;
 import sim.engine.SimState;
 
-public class FixedBond extends MasonScheduledContracts {
+public class FixedBond extends ScheduledContracts {
 
     private State currentState;
     private Agent seller;
@@ -22,7 +22,7 @@ public class FixedBond extends MasonScheduledContracts {
     private Double gapBetweenCoupons;
 
     public FixedBond(String name, SimState state, ContractHandler handler, Agent seller, Agent buyer, Long principal,
-	    Long coupon, Integer numCoupons, String goodName, Double gapBetweenCoupons) {
+					 Long coupon, Integer numCoupons, String goodName, Double gapBetweenCoupons) {
 
 	super(name, state, handler);
 
@@ -38,7 +38,7 @@ public class FixedBond extends MasonScheduledContracts {
     }
 
     @Override
-    public ScheduledObligation requestNextObligation() {
+    public ScheduledObligation requestNextObligation(SimState state) {
 
 	Obligation o = null;
 	Double time = gapBetweenCoupons;
@@ -57,7 +57,7 @@ public class FixedBond extends MasonScheduledContracts {
 	    break;
 	}
 
-	return (new ScheduledObligation(o, this.getState().schedule.getSteps() + time));
+	return (new ScheduledObligation(o, state.schedule.getSteps() + time));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class FixedBond extends MasonScheduledContracts {
 	    break;
 	case COUPON:
 	    // if all the coupons have been paid, then move the
-	    // contract to a matured status.
+	    // org.economicsl.contract to a matured status.
 	    if (this.numCoupons <= 0) {
 		this.currentState = State.MATURED;
 		// if there are more coupons to be paid, subtract the number
@@ -89,7 +89,7 @@ public class FixedBond extends MasonScheduledContracts {
 	    }
 	    break;
 
-	// if the matured payment has been made, terminate the contract.
+	// if the matured payment has been made, terminate the org.economicsl.contract.
 	case MATURED:
 	    this.currentState = State.TERMINATED;
 	}

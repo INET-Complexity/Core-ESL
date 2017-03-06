@@ -1,17 +1,18 @@
-package contract.examples;
+package org.java.org.economicsl.contract.examples;
 
-import agent.Agent;
-import contract.MasonScheduledContracts;
-import contract.handler.ContractHandler;
-import contract.messages.ObligationResponse;
-import contract.obligation.Obligation;
-import contract.obligation.ScheduledObligation;
+import org.java.org.economicsl.agent.Agent;
+import org.java.org.economicsl.contract.ScheduledContracts;
+import org.java.org.economicsl.contract.handler.ContractHandler;
+import org.java.org.economicsl.contract.messages.ObligationResponse;
+import org.java.org.economicsl.contract.obligation.Obligation;
+import org.java.org.economicsl.contract.obligation.ScheduledObligation;
 import ec.util.MersenneTwisterFast;
-import inventory.Contract;
-import inventory.Good;
+import org.java.org.economicsl.inventory.Contract;
+import org.java.org.economicsl.inventory.Good;
 import sim.engine.SimState;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class RandomTransfers extends MasonScheduledContracts {
+public class RandomTransfers extends ScheduledContracts {
 
     private Agent agent1;
     private Agent agent2;
@@ -28,7 +29,7 @@ public class RandomTransfers extends MasonScheduledContracts {
     @Override
     public void handleResponse(ObligationResponse response) {
 
-	// if someone couldn't handle the transfer, cancel the contract.
+	// if someone couldn't handle the transfer, cancel the org.economicsl.contract.
 	if (!response.getFilled()) {
 	    active = false;
 	} else {
@@ -48,7 +49,7 @@ public class RandomTransfers extends MasonScheduledContracts {
     }
 
     @Override
-    public ScheduledObligation requestNextObligation() {
+    public ScheduledObligation requestNextObligation(SimState state) {
 
 	if (!active) {
 	    return null;
@@ -86,8 +87,8 @@ public class RandomTransfers extends MasonScheduledContracts {
 
     @Override
     public Contract addition(Contract c) {
-	// TODO Auto-generated method stub
-	return null;
+	System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	throw new NotImplementedException();
     }
 
 }

@@ -1,7 +1,7 @@
-package inventory;
+package org.java.org.economicsl.inventory;
 
 /**
- * Item is the parent class for all objects which go on an inventory. This
+ * Item is the parent class for all objects which go on an org.economicsl.inventory. This
  * includes goods and contracts.
  * 
  * @author prauwolf

@@ -1,6 +1,6 @@
-package contract.messages;
+package org.java.org.economicsl.contract.messages;
 
-import contract.obligation.Obligation;
+import org.java.org.economicsl.contract.obligation.Obligation;
 
 /**
  * FillObligation contains information necessary for requesting the fulfillment

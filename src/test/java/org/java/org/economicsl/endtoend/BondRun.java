@@ -1,12 +1,12 @@
-package endtoend;
+package org.java.org.economicsl.endtoend;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import agent.Agent;
-import contract.examples.FixedBond;
-import contract.handler.AutomaticContractHandler;
-import inventory.Good;
+import org.java.org.economicsl.agent.Agent;
+import org.java.org.economicsl.contract.examples.FixedBond;
+import org.java.org.economicsl.contract.handler.AutomaticContractHandler;
+import org.java.org.economicsl.inventory.Good;
 import sim.engine.SimState;
 
 public class BondRun extends SimState {
@@ -63,7 +63,7 @@ public class BondRun extends SimState {
 
 		FixedBond contract = new FixedBond("bond", this, handler, governments.get(i), buyers.get(j),
 			new Long(1000), new Long(30), 24, "cash", 1.0);
-		contract.start();
+		contract.start(this);
 	    }
 	}
     }
